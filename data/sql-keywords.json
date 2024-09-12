@@ -1,0 +1,38 @@
+{
+    "keywords": [
+      "SELECT", "FROM", "WHERE", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP",
+      "TABLE", "INDEX", "VIEW", "TRIGGER", "PROCEDURE", "FUNCTION",
+      "AND", "OR", "NOT", "IN", "BETWEEN", "LIKE", "IS", "NULL",
+      "ORDER BY", "GROUP BY", "HAVING", "LIMIT", "OFFSET",
+      "JOIN", "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL JOIN",
+      "UNION", "INTERSECT", "EXCEPT",
+      "AS", "ON", "USING", "VALUES", "SET",
+      "DESC", "ASC", "DISTINCT", "ALL",
+      "COUNT", "SUM", "AVG", "MAX", "MIN"
+    ],
+    "functions": [
+      "COALESCE", "NULLIF", "CAST", "CONVERT",
+      "UPPER", "LOWER", "TRIM", "LTRIM", "RTRIM",
+      "CONCAT", "SUBSTRING", "LENGTH", "CHAR_LENGTH",
+      "ABS", "ROUND", "CEIL", "FLOOR",
+      "CURRENT_DATE", "CURRENT_TIME", "CURRENT_TIMESTAMP",
+      "DATE_PART", "DATE_TRUNC", "EXTRACT",
+      "TO_CHAR", "TO_DATE", "TO_NUMBER"
+    ],
+    "types": [
+      "INTEGER", "VARCHAR", "BOOLEAN", "DATE", "TIME", "TIMESTAMP",
+      "NUMERIC", "REAL", "DOUBLE PRECISION", "TEXT", "ARRAY",
+      "JSON", "JSONB", "UUID", "GEOGRAPHY", "GEOMETRY", "SERIAL"
+    ],
+    "operators": [
+        "=", "!=", "<>", "<", ">", "<=", ">=",
+        "IS NULL", "IS NOT NULL",
+        "AND", "OR", "NOT",
+        "LIKE", "ILIKE", "GLOB", "REGEXP", "RLIKE"
+    ],
+    "modifiers": [
+      "PRIMARY KEY", "NOT NULL", "UNIQUE", "DEFAULT", "AUTO_INCREMENT",
+      "FOREIGN KEY", "CHECK", "REFERENCES", "CASCADE", "RESTRICT",
+      "ON DELETE", "ON UPDATE", "CONSTRAINT"
+    ]
+  }
