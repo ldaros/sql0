@@ -72,7 +72,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
 
   const handleRunQuery = async () => {
     try {
-        const query = getActiveTab()?.content
+        const query = getActiveTabContent()
         const response = await fetch('/api/postgres/query', {
           method: 'POST',
           headers: {

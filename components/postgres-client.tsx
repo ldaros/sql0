@@ -171,11 +171,7 @@ function PostgresClientContent() {
 
           {/* SQL Editor */}
           <div className="relative" style={{ height: editorHeight }}>
-            <SQLEditor 
-              query={getActiveTabContent()}
-              setQuery={setActiveTabContent}
-              tables={tables}
-            />
+            <SQLEditor />
           </div>
 
           {/* Resizable divider */}

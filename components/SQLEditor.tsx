@@ -1,10 +1,18 @@
 import { useEffect, useRef, useCallback, useState } from "react"
 import Editor, { useMonaco } from "@monaco-editor/react"
 import sqlKeywords from "@/data/sql-keywords.json"
+import { useDatabaseContext } from "@/hooks/useDatabaseContext"
 
-export const SQLEditor = ({ query, setQuery, tables }: 
-  { query: string, setQuery: (query: string) => void, tables: { tableName: string, columns: string[] }[]}) => {
+export const SQLEditor = () => {
   const monaco = useMonaco()
+  const editorRef = useRef(null)
+
+  const { getActiveTabContent, setActiveTabContent, tables, handleRunQuery, handleSaveQuery, addNewTab } = useDatabaseContext()
+
+  const handleRun = () => {
+    handleRunQuery()
+  }
+
 
   const getCompletionItems = (tables: { tableName: string, columns: string[] }[]) => {
     const suggestions = [
@@ -43,13 +51,14 @@ export const SQLEditor = ({ query, setQuery, tables }:
         insertText: operator,
       })),
     ];
-``
+
     return { suggestions };
   }
 
   useEffect(() => {
     if (monaco) {
       const provider = monaco.languages.registerCompletionItemProvider('sql', {
+        // @ts-ignore 
         provideCompletionItems: (model, position) => {
           return getCompletionItems(tables);
         }
@@ -61,13 +70,25 @@ export const SQLEditor = ({ query, setQuery, tables }:
     }
   }, [monaco, tables]);
 
+  const handleEditorDidMount = useCallback((editor, monaco) => {
+    editorRef.current = editor;
+  }, [handleRunQuery]);
+
+  useEffect(() => {
+    if (editorRef.current && monaco) {
+      const editor = editorRef.current as any;
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, handleRunQuery);
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, handleSaveQuery);
+    }
+  }, [handleRunQuery, monaco]);
+
   return (
     <Editor
       height="100%"
       defaultLanguage="sql"
       theme="light"
-      value={query}
-      onChange={(value) => setQuery(value || "")}
+      value={getActiveTabContent()}
+      onChange={(value) => setActiveTabContent(value || "")}
       options={{
         minimap: { enabled: false },
         fontSize: 16,
@@ -76,6 +97,7 @@ export const SQLEditor = ({ query, setQuery, tables }:
         suggestOnTriggerCharacters: true,
       }}
       width="100%"
+      onMount={handleEditorDidMount}
     />
   )
 }
